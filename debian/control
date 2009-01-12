@@ -1,0 +1,17 @@
+Source: gbirthday
+Section: gnome
+Priority: extra
+Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.8.0
+
+Package: gbirthday
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, evolution-data-server, python,
+ python-gtk2 (>= 2.10), ${python:Depends}
+XB-Python-Version: ${python:Versions}
+Description: birthday reminder for Evolution Contacts
+ GBirthday is a birthday reminder application that helps you to remenber your
+ evolution contacts' birthdays. It puts an icon in the notification area when
+ any of your contacts' birthdays are coming up soon.
+
