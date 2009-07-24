@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
 DM-Upload-Allowed: yes
 Build-Depends: debhelper (>= 5)
-Standards-Version: 3.8.0
+Standards-Version: 3.8.2
 
 Package: gbirthday
 Architecture: all
