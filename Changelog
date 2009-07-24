@@ -1,0 +1,72 @@
+0.4.1
+	Fixed bug with month text and python 2.4.
+	Fixed bug with birthdays in same day and year.
+	Forced pygtk version to 2. It needs 2.10 to work.
+	Added support for multiple evolution addressbooks, by Stefan Jurco.
+	Inproved title box background color, now gets value from gtk theme.
+	Set greyscale when no birthdays in selected period.
+	Added Slovak translation, by Stefan Jurco.
+	Added Italian translation, by Alex Mallo.
+
+0.4.0
+	Added internationalization, by Robert Wildburger.
+	Added languages: German, Spanish, French, Portuguese and Galician.
+	Fixed stop blinking bug which made it start to blink again each minute.
+
+0.3.4
+	Fixed bug with data format that mades gbirthday to crash.
+
+0.3.3
+	Rewrote about window with gtk.AboutDialog.
+	Added function to check and blink if there are birthdays today at midnight.
+	Improved preference spinners signals.
+	Set Past birthdays spinner as a reverse spinner.
+
+0.3.2
+	Added preferences window to set past and next birthdays range.
+	Improved birthday data window when no birthday with message.
+0.3.1
+	Fixed file as "lastname, firstname" backslash character issue.
+	Added configuration File: ~/.gbirthday.conf.
+
+0.3.0
+	Set birthday data fake title background to label bg color.
+	Added birthday window fake frame.
+	Some about window lesser look improvements.
+	New icon set trying to follow tango guidelines
+	Changed stop blinking icon.
+
+0.2.4
+	Erased negative sign in lost birthdays.
+	Fixed double click bug that aviod birthday data window close.
+	Set birthday data window icon.
+	Deleted lots of obsolete debugging lines.
+	Added About window.
+	
+0.2.3
+	Changed name shown from "Full Name" to "File as".
+	Best Alignement on birthday bindow.
+	Bold text on today birthdays.
+	Grey text on lost birthdays.
+
+0.2.2
+	Added path to resources folder on image loading.
+	Added ugly install script.
+
+0.2.1
+	Added years to birthdays window.
+	Best title look.
+
+0.2.0
+	Moved birthday data to frameless left click (fake menu) window.
+	Splited data into a table.
+
+0.1.2
+	Added "Reload" option.
+	Added "Stop blinking" option.
+
+0.1.1
+	Fixed issue with 2 character months.
+
+0.1.0
+	First version, Just a popup menu with birthday data and quit.
