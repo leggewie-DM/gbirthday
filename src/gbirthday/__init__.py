@@ -55,11 +55,7 @@ try:
 except ImportError:
     _ = lambda x: x
 
-# own imports
-from .databases import Evolution, Lightning, Sunbird, CSV, MySQL
 
-# list of all availabe databases
-DATABASES = [Evolution(), Lightning(), Sunbird(), CSV(), MySQL()]
 CURRENT_DAY = time.strftime("%d", time.localtime(time.time()))
 
 
@@ -69,6 +65,7 @@ class Conf:
     def __init__(self):
         '''Try to read config file or initialize with default values.'''
         import ConfigParser
+        from .databases import MySQL
         self.firstday = self.lastday = None
         self.notify_future_bdays = None
         self.used_databases = None
@@ -94,7 +91,7 @@ class Conf:
         '''correct new settings, e.g. Evolution and not evolution anymore'''
         def replace(old, new, changed):
             '''replace old with new'''
-            for num, item in enumerate(self.used_databases):
+            for num in range(len(self.used_databases)):
                 if self.used_databases[num] == old:
                     changed = True
                     self.used_databases[num] = new

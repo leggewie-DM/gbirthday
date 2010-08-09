@@ -29,6 +29,9 @@ import gtk
 
 from .gtk_funcs import show_error_msg
 
+SUPPORTED_DATABASES = ['DataBase', 'CSV', 'Evolution', 'Lightning',
+                        'MySQL', 'Sunbird']
+
 class DataBase:
     '''
      inheritance class for all databases
@@ -45,25 +48,28 @@ class DataBase:
         # new entries can be saved
         self.CAN_SAVE = can_save
         # additional config options for database connection or fukebane(s)
-        self.HAS_CONFIG = can_save
+        self.HAS_CONFIG = has_config
         # the widget for additional config
         self.widget = widget
+        # the main addressbook
+        self.addressbook = None
 
-    def parse(self, addressbook, conf):
+    def set_addressbook(self, addressbook):
+        self.addressbook = addressbook
+
+    def parse(self):
         '''load file / open database connection'''
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
         pass
 
     def add(self, name, birthday):
         '''save new birthday to file/database (only if CAN_SAVE == true)'''
         pass
 
-    def create_config(self, table, conf):
+    def create_config(self, table):
         '''create additional pygtk config in config menu'''
         pass
 
-    def update(self, conf):
+    def update(self):
         '''update and save values in file'''
         pass
 
@@ -92,18 +98,12 @@ class CSV(DataBase):
     def __init__(self):
         DataBase.__init__(self, title='CSV-file (comma seperated value)')
         self._seperators = ['; ', ', ', ': ']   # possible seperators
-        self.addressbook = None
-        self.conf = None
 
-    def parse(self, addressbook, conf):
+    def parse(self):
         '''open and parse file'''
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
-        self.addressbook = addressbook
-        self.conf = conf
-        if not conf.csv_files:
+        if not self.addressbook.conf.csv_files:
             return
-        for filename in conf.csv_files:
+        for filename in self.addressbook.conf.csv_files:
             if (os.path.exists(filename)):
                 for line in file(filename):
                     # check, if any of the seperators are in the text
@@ -111,7 +111,7 @@ class CSV(DataBase):
                         if len(line.split(sep)) > 1:
                             date = line.split(sep, 1)[0]
                             name = line.split(sep, 1)[1][:-1]
-                            addressbook.add(name, date)
+                            self.addressbook.add(name, date)
                             break
             else:
                 show_error_msg(_('Could not save, CVS-file not set.')
@@ -121,55 +121,56 @@ class CSV(DataBase):
         '''add new person with birthday to end of csv-file'''
         birthday = str(birthday)
         # TODO: show menu to select file?
-        if len(self.conf.csv_files) == 0:
+        if len(self.addressbook.conf.csv_files) == 0:
             show_error_msg(_('CSV-file does not exist'))
             return
-        filename = self.conf.csv_files[0]
+        filename = self.addressbook.conf.csv_files[0]
         if (os.path.exists(filename)):
-            output_file = file(self.conf.csv_files[0], 'a')
+            output_file = file(self.addressbook.conf.csv_files[0], 'a')
         else:
-            output_file = file(self.conf.csv_files[0], 'w')
+            output_file = file(self.addressbook.conf.csv_files[0], 'w')
         output_file.write(birthday + ', ' + name + '\n')
         output_file.close()
         self.addressbook.add(name, birthday)
 
-    def remove_file(self, widget, combobox, conf):
+    def remove_file(self, widget, combobox):
         index = combobox.get_active()
         if index >= 0:
             combobox.remove_text(index)
-            conf.csv_files.remove(conf.csv_files[index])
-        return
+            self.addressbook.conf.csv_files.remove(
+                self.addressbook.conf.csv_files[index])
 
-    def add_file(self, widget, combobox, entry, conf):
+    def add_file(self, widget, combobox, entry):
         filename = entry.get_text()
         combobox.append_text(filename)
-        if conf.csv_files:
-            conf.csv_files.append(filename)
+        if self.addressbook.conf.csv_files:
+            self.addressbook.conf.csv_files.append(filename)
         else:
-            conf.csv_files = [filename]
+            self.addressbook.conf.csv_files = [filename]
 
-    def create_config(self, pref, conf):
+    def create_config(self, pref):
         '''create aditional options menu'''
         vbox = gtk.VBox()
         hbox = gtk.HBox()
         hbox2 = gtk.HBox()
         vbox.pack_start(hbox)
         combobox = gtk.combo_box_new_text()
-        if conf.csv_files:
-            for csv_file in conf.csv_files:
+        if self.addressbook.conf.csv_files:
+            for csv_file in self.addressbook.conf.csv_files:
                 combobox.append_text(csv_file)
         combobox.set_active(0)
         combobox.show()
         hbox.pack_start(combobox)
         remove_button = gtk.Button('remove')
-        remove_button.connect("clicked", self.remove_file, combobox, conf)
+        remove_button.connect("clicked", self.remove_file, combobox)
         remove_button.show()
         hbox.pack_start(remove_button, 0)
         hbox.show()
 
         entry = gtk.Entry()
-        if conf.csv_files and len(conf.csv_files) > 0:
-            entry.set_text(conf.csv_files[0])
+        if (self.addressbook.conf.csv_files and
+                len(self.addressbook.conf.csv_files) > 0):
+            entry.set_text(self.addressbook.conf.csv_files[0])
         hbox2.pack_start(entry)
         entry.show()
 
@@ -204,7 +205,7 @@ class CSV(DataBase):
         hbox2.pack_start(search_button)
 
         add_button = gtk.Button('add')
-        add_button.connect("clicked", self.add_file, combobox, entry, conf)
+        add_button.connect("clicked", self.add_file, combobox, entry)
         add_button.show()
         hbox2.pack_start(add_button)
 
@@ -222,10 +223,8 @@ class Evolution(DataBase):
                         can_save=False, has_config=False)
         self._split_re = re.compile(r'\r?\n')
 
-    def parse(self, addressbook=None, conf=None):
+    def parse(self):
         '''load and parse parse Evolution data files'''
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
         try:
             import evolution
             # When there is no evolution addressbook, silently abort
@@ -244,9 +243,9 @@ class Evolution(DataBase):
                 # contact.props.birth_date{.year, .month, .day} non-existing
                 # -> using vcard
                 vcard = contact.get_vcard_string()
-                self.parse_birthday((contact.props.full_name, vcard), addressbook)
+                self.parse_birthday((contact.props.full_name, vcard))
 
-    def parse_birthday(self, data, addressbook):
+    def parse_birthday(self, data):
         '''parse evolution addressbook. the file is in VCard format.'''
         # TODO change to contact.props.birth_date, no vcard would be needed
         full_name, vcard = data
@@ -254,7 +253,7 @@ class Evolution(DataBase):
         for line in lines:
             # if BDAY is in vcard, use this as birthday
             if line.startswith('BDAY'):
-                addressbook.add(full_name, line.split(':', 1)[1])
+                self.addressbook.add(full_name, line.split(':', 1)[1])
 
 
 class Lightning(DataBase):
@@ -265,7 +264,6 @@ class Lightning(DataBase):
         DataBase.__init__(self, title=title, has_config=has_config)
         self.THUNDERBIRD_LOCATION = os.path.join(os.environ['HOME'],
             '.mozilla-thunderbird')
-        self.ab = None
         self.cursor = None
         self.conn = None
 
@@ -304,10 +302,8 @@ class Lightning(DataBase):
                     return
         show_error_msg(_('Error reading profile file: %s' % configfile))
 
-    def parse(self, addressbook, conf=None):
+    def parse(self):
         '''open thunderbird sqlite-database'''
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
         if (os.path.exists(self.THUNDERBIRD_LOCATION)):
             self.get_config_file(self.THUNDERBIRD_LOCATION)
 
@@ -335,7 +331,7 @@ class Lightning(DataBase):
         self.cursor.execute(qry)
         for row in self.cursor:
             bday = datetime.datetime.utcfromtimestamp(int(row[1]) / 1000000)
-            self.ab.add(row[0], str(bday).split(' ')[0])
+            self.addressbook.add(row[0], str(bday).split(' ')[0])
 
     def add(self, name, birthday):
         import time, uuid
@@ -388,7 +384,7 @@ class Lightning(DataBase):
         except Exception as msg:
             show_error_msg(_('Could not execute SQLite-query')
                             + ': %s\n %s' % (qry, str(msg)))
-        self.ab.add(name, str(birthday))
+        self.addressbook.add(name, str(birthday))
 
 
 class MySQL(DataBase):
@@ -404,7 +400,6 @@ class MySQL(DataBase):
         self.table = 'person'
         self.name_row = 'name'
         self.date_row = 'date'
-        self.ab = None
         self.cursor = None
         self.conn = None
 
@@ -427,10 +422,8 @@ class MySQL(DataBase):
             show_error_msg(_('Could not connect to MySQL-Server')
                             + str(msg))
 
-    def parse(self, addressbook, conf):
+    def parse(self):
         '''connect to mysql-database and get data'''
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
         self.connect()
         try:
             qry = ("SELECT %s, %s FROM %s"
@@ -438,7 +431,7 @@ class MySQL(DataBase):
             self.cursor.execute(qry)
             rows = self.cursor.fetchall()
             for row in rows:
-                addressbook.add(row[0], str(row[1]))
+                self.addressbook.add(row[0], str(row[1]))
         except Exception as msg:
             show_error_msg(_('Could not execute MySQL-query')
                             + ': %s\n %s' % (qry, str(msg)))
@@ -456,9 +449,9 @@ class MySQL(DataBase):
             show_error_msg(_('Could not execute MySQL-query')
                             + ': %s\n %s' % (qry, str(msg)))
         self.conn.close()
-        self.ab.add(name, birthday)
+        self.addressbook.add(name, birthday)
 
-    def update(self, conf):
+    def update(self):
         '''update and save values'''
         if self.entries and self.entries != []:
             self.host = self.entries[0].get_text()
@@ -470,9 +463,9 @@ class MySQL(DataBase):
             self.name_row = self.entries[6].get_text()
             self.date_row = self.entries[7].get_text()
 
-            conf.MySQL = self
+            self.addressbook.conf.MySQL = self
 
-    def create_config(self, pref, conf):
+    def create_config(self, pref):
         '''create additional mysql config in config menu'''
         table = gtk.Table(1, 2)
 
@@ -522,9 +515,7 @@ class Sunbird(Lightning):
         self.mozilla_location = os.path.join(os.environ['HOME'],
                 '.mozilla')
 
-    def parse(self, addressbook, conf):
-        # XXX: set addressbook in __init__?
-        self.ab = addressbook
+    def parse(self):
         '''load file / open database connection'''
         sunbird = os.path.join(self.mozilla_location, 'sunbird')
         iceowl = os.path.join(self.mozilla_location, 'iceowl')
