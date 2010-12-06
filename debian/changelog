@@ -1,3 +1,21 @@
+gbirthday (0.6.4-1) experimental; urgency=low
+
+  * release upstream version 0.6.4 to experimental. Closes: #564456
+  * debian/control:
+    - allow uploads by Debian Maintainers
+    - add a couple of build-time dependencies the new upstream requires
+    - update to standard 3.9.1
+    - add Vcs-* fields
+    - add Homepage entry
+  * debian/watch: add watch file
+  * debian/copyright: update upstream and my copyright information
+  * radically simplify debian/rules with dh7's rules.tiny
+  * switch to DebSrc3.0 format. Closes: #600608
+  * add simple manpage provided by Braulio Valdivielso Martínez
+    Closes: #605979
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Mon, 06 Dec 2010 15:17:38 +0800
+
 gbirthday (0.4.1-2) unstable; urgency=low
 
   * Initial release. (Closes: #511640)
