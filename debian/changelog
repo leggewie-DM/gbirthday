@@ -1,3 +1,13 @@
+gbirthday (0.6.4-3) unstable; urgency=low
+
+  [Jakub Wilk]
+  * debian/control: set XS-Python-Version to a minimum of 2.6. Closes:#617835
+
+  [Rolf Leggewie]
+  * debian/control: update long description
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Sat, 12 Mar 2011 21:14:26 +0800
+
 gbirthday (0.6.4-2) unstable; urgency=low
 
   * debian/control: add python-evolution run-time dependencies.
