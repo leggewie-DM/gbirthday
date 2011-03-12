@@ -17,8 +17,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, evolution-data-server, python,
  python-gtk2 (>= 2.10), ${python:Depends}
 Recommends: python-evolution
 XB-Python-Version: ${python:Versions}
-Description: birthday reminder for Evolution Contacts
- GBirthday is a birthday reminder application that helps you to remenber your
- evolution contacts' birthdays. It puts an icon in the notification area when
- any of your contacts' birthdays are coming up soon.
-
+Description: birthday reminder applet
+ GBirthday is an applet to help you remember your friends' and contacts'
+ birthdays.  It uses the notifcation area for alerts.  Data can be stored
+ in a number of address book formats, flat file CSV and mysql database.
