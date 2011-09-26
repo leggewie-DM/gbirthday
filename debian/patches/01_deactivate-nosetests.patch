@@ -1,0 +1,20 @@
+Description: the current nosetests have a number of issues
+ deactivate them until those have been resoled upstream
+ .
+ https://sourceforge.net/tracker/?func=detail&aid=3414256&group_id=210152&atid=1012585
+ https://sourceforge.net/tracker/?func=detail&aid=3411777&group_id=210152&atid=1012585
+Author: Rolf Leggewie <foss@rolf.leggewie.biz>
+Upstream: not needed
+
+--- gbirthday-0.6.5.orig/Makefile
++++ gbirthday-0.6.5/Makefile
+@@ -51,9 +52,6 @@ tar.gz:	clean
+ tar.xz: clean
+ 	$(tar) -Jcf gbirthday-$(version).tar.xz *
+ 
+-test:
+-	nosetests -v --with-coverage --cover-package=gbirthday
+-
+ pot:
+ 	cd po && intltool-update --pot
+ 
