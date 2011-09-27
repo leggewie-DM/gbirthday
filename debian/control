@@ -20,4 +20,4 @@ XB-Python-Version: ${python:Versions}
 Description: birthday reminder applet
  GBirthday is an applet to help you remember your friends' and contacts'
  birthdays.  It uses the notifcation area for alerts.  Data can be stored
- in a number of address book formats, flat file CSV and mysql database.
+ in a number of address book formats, flat file CSV and MySQL database.
