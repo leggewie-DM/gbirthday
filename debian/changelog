@@ -1,3 +1,15 @@
+gbirthday (0.6.5-1) unstable; urgency=low
+
+  * new upstream release 0.6.5
+  * debian/control:
+    - update to Standard version 3.9.2. No further changes.
+    - s/mysql/MySQL/
+  * temporarily deactivate nosetests. (Closes: #642811)
+  * debian/copyright: update my copyright
+  * debian/dirs: drop some unused directories
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Tue, 27 Sep 2011 12:12:43 +0800
+
 gbirthday (0.6.4-4) unstable; urgency=low
 
   * debian/control: add python-support to build dependencies. Closes: #633900
