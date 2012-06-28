@@ -35,42 +35,14 @@ def teardown():
 def test_init_no_bday():
     '''init_database'''
     assert database
-    database.parse()
+    database.parse('addressbook', 'conf')
     assert database
     database.add('name', 'birthday')
     assert database
-    database.update()
+    database.save_config('conf')
     assert database
-    database.create_config('table')
+    database.create_config('table', 'conf')
     assert database
-    database.update()
+    database.save_config('conf')
     assert database
 
-@with_setup(setup, teardown)
-def test_activate():
-    '''test (de)activate'''
-    class wid():
-        def __init__(self):
-            self.sensitive = False
-
-        def set_sensitive(self, set_to):
-            self.sensitive = set_to
-
-    database.widget = wid()
-
-    database.activate()
-    assert database.widget.sensitive
-    database.deactivate()
-    assert not database.widget.sensitive
-    database.deactivate()
-    assert not database.widget.sensitive
-    database.activate()
-    assert database.widget.sensitive
-
-def test_evolution():
-    '''evolution is working with local evolution setup?'''
-    from .databases import Evolution
-    e = Evolution()
-    e.parse()
-    assert (e.TITLE == 'Evolution')
-    assert (not e.addressbook)
