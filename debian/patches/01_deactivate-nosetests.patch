@@ -8,7 +8,7 @@ Upstream: not needed
 
 --- gbirthday-0.6.5.orig/Makefile
 +++ gbirthday-0.6.5/Makefile
-@@ -51,9 +52,6 @@ tar.gz:	clean
+@@ -52,9 +52,6 @@ tar.gz:	clean
  tar.xz: clean
  	$(tar) -Jcf gbirthday-$(version).tar.xz *
  
@@ -16,5 +16,5 @@ Upstream: not needed
 -	nosetests -v --with-coverage --cover-package=gbirthday
 -
  pot:
- 	cd po && intltool-update --pot
- 
+ 	cd po && intltool-update --pot -g gbirthday
+
