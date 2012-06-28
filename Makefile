@@ -2,7 +2,7 @@ bindir = /usr/bin
 datadir = /usr/share
 sitelib = /usr/lib/python2.6/site-packages
 pixmaps = $(datadir)/pixmaps
-version = 0.6.5
+version = 0.6.6
 
 install = install -p
 mkdir = mkdir -p
@@ -21,6 +21,7 @@ clean:
 	$(rm) gbirthday.desktop
 	$(rm) -r gbirthday-$(version) BUILDROOT noarch
 	$(rm) gbirthday*.src.rpm
+	$(rm) `find . | grep ".pyc"`
 
 install:
 	intltool-merge -d ./po ./gbirthday.desktop.in ./gbirthday.desktop
@@ -55,7 +56,7 @@ test:
 	nosetests -v --with-coverage --cover-package=gbirthday
 
 pot:
-	cd po && intltool-update --pot
+	cd po && intltool-update --pot -g gbirthday
 
 rpm:	tar.xz
 	cp gbirthday-*.tar.xz ~/rpmbuild/SOURCES

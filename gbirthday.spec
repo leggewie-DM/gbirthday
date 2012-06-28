@@ -1,1 +1,0 @@
-/home/tom/programming/package-maintaining/self.maintaining/gbirthday/devel/gbirthday.spec
