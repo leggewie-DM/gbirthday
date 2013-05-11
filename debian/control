@@ -2,7 +2,7 @@ Source: gbirthday
 Section: gnome
 Priority: extra
 Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
-Build-Depends: debhelper (>= 7), python-nose, python-support, python-coverage, python-gtk2, intltool
+Build-Depends: debhelper (>= 7.0.50~), python-nose, python-support, python-coverage, python-gtk2, intltool
 X-Python-Version: >= 2.6
 Standards-Version: 3.9.3
 Homepage: http://gbirthday.sf.net/
