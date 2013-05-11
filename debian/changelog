@@ -1,3 +1,16 @@
+gbirthday (0.6.6-3) unstable; urgency=low
+
+  * control:
+    - bump build dependency for debhelper to allow dh overrides
+    - drop obsolete DMUA field
+    - update and drop as necessary the X?-Python-Version fields
+    - bump policy to version 3.9.4. No further changes.
+  * rules: always install to /usr/share/pyshared. Closes: #646806
+    Many thanks to Colin Watson.
+  * copyright: update my claim to 2013
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Sat, 11 May 2013 12:41:29 +0800
+
 gbirthday (0.6.6-2) unstable; urgency=low
 
   * Imported new upstream release version 0.6.6
