@@ -14,7 +14,6 @@ Package: gbirthday
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
  python-gtk2 (>= 2.10), ${python:Depends}
-Recommends: python-evolution, evolution-data-server
 Description: birthday reminder applet
  GBirthday is an applet to help you remember your friends' and contacts'
  birthdays.  It uses the notifcation area for alerts.  Data can be stored

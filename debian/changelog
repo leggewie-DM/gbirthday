@@ -1,3 +1,14 @@
+gbirthday (0.6.6-3) UNRELEASED; urgency=low
+
+  * debian/patches/03_disable_evo_database.patch:
+    - Add patch from Ubuntu to disable Evolution database support
+      since python-evolution is no longer available
+  * debian/control:
+    - Drop recommends on python-evolution and evolution-data-server.
+      (Closes: #646806)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Thu, 13 Jun 2013 14:42:42 -0400
+
 gbirthday (0.6.6-2) unstable; urgency=low
 
   * Imported new upstream release version 0.6.6
