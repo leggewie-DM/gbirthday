@@ -1,3 +1,12 @@
+gbirthday (0.6.7-1) unstable; urgency=low
+
+  * new upstream release 0.6.7
+    - all events have unique UID. Closes: #747369
+  * update my packaging copyright claim to 2014
+  * control: bump to Debian standards 3.9.5. No further changes.
+
+ -- Rolf Leggewie <foss@rolf.leggewie.biz>  Tue, 17 Jun 2014 06:53:28 +0800
+
 gbirthday (0.6.6-3) unstable; urgency=low
 
   * control:
