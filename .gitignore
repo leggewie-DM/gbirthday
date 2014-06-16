@@ -1,0 +1,8 @@
+*.tar*
+*.pyc
+*.src.rpm
+noarch
+gbirthday.spec
+.coverage
+*.swp
+dist
