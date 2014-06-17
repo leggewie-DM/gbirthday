@@ -8,9 +8,9 @@ Upstream: not needed
 
 --- gbirthday-0.6.5.orig/Makefile
 +++ gbirthday-0.6.5/Makefile
-@@ -52,9 +52,6 @@ tar.gz:	clean
- tar.xz: clean
- 	$(tar) -Jcf gbirthday-$(version).tar.xz *
+@@ -57,9 +57,6 @@ tar.gz:	clean
+ tar.xz: snapshot
+ 	cd $(DIST_DIR) && $(tar) -Jcf gbirthday-$(version).tar.xz gbirthday-$(version)
  
 -test:
 -	nosetests -v --with-coverage --cover-package=gbirthday
