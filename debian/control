@@ -3,11 +3,12 @@ Section: gnome
 Priority: extra
 Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
 Build-Depends: debhelper (>= 9),
+               dh-python,
                intltool,
+               python,
                python-coverage,
                python-gtk2,
-               python-nose,
-               dh-python, python
+               python-nose
 X-Python-Version: >= 2.6
 Standards-Version: 3.9.6
 Homepage: http://gbirthday.sf.net/
