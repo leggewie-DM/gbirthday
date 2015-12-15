@@ -1,1 +1,2 @@
 01_deactivate-nosetests.patch
+load-from-private-dir.patch
