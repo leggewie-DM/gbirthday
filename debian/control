@@ -21,8 +21,7 @@ Depends: python,
          ${misc:Depends},
          ${python:Depends},
          ${shlibs:Depends}
-Recommends: evolution-data-server,
-            python-evolution
+Recommends: evolution-data-server
 Description: birthday reminder applet
  GBirthday is an applet to help you remember your friends' and contacts'
  birthdays.  It uses the notifcation area for alerts.  Data can be stored
