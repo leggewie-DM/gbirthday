@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
 Build-Depends: debhelper (>= 7.0.50~), python-nose, python-support, python-coverage, python-gtk2, intltool
 X-Python-Version: >= 2.6
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://gbirthday.sf.net/
 Vcs-Browser: http://git.debian.org/?p=collab-maint/gbirthday.git
 Vcs-Git: git://git.debian.org/collab-maint/gbirthday.git
