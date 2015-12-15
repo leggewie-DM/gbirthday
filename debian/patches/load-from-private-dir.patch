@@ -1,0 +1,22 @@
+Description: We install gbirthday in a private location in /usr/share/gbirthday
+ let's make the launcher cope with this
+Author: Mattia Rizzolo <mattia@debian.org>
+Last-Update: 2015-12-15
+Forwarded: no
+
+--- a/src/gb
++++ b/src/gb
+@@ -1,4 +1,12 @@
+ #!/usr/bin/python
+ '''import main function from gbirthday and execute it'''
+-from gbirthday import main
++try:
++    from gbirthday import main
++except ImportError:
++    # maybe it's installed in a private location
++    import os, sys
++    usr_share_path = os.path.join('/', 'usr', 'share', 'gbirthday')
++    if os.path.exists(usr_share_path):
++        sys.path.insert(0, usr_share_path)
++        from gbirthday import main
+ main()
