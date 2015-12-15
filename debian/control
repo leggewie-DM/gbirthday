@@ -7,12 +7,12 @@ Build-Depends: debhelper (>= 7.0.50~),
                python-coverage,
                python-gtk2,
                python-nose,
-               python-support
+               dh-python, python
 X-Python-Version: >= 2.6
 Standards-Version: 3.9.6
 Homepage: http://gbirthday.sf.net/
-Vcs-Browser: http://git.debian.org/?p=collab-maint/gbirthday.git
-Vcs-Git: git://git.debian.org/collab-maint/gbirthday.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/gbirthday.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/gbirthday.git
 
 Package: gbirthday
 Architecture: all
