@@ -1,3 +1,18 @@
+gbirthday (0.6.7-1.1) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Bump Standards-Version to 3.9.6: no changes needed.
+  * Run wrap-and-sort.
+  * Canonicalize Vcs-* fields.
+  * Bump debhelper compat level to 9.
+  * Stop recommending python-evolution.  Closes: #707843
+  * Add a patch to allow gbirthday load from /usr/share/gbirthday if needed.
+  * Build using dh-python instead of python-support.  Closes: #786165.
+    Also, move all the files to the private location /usr/share/gbirthday, since
+    this is an application.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Wed, 16 Dec 2015 00:13:45 +0000
+
 gbirthday (0.6.7-1) unstable; urgency=low
 
   * new upstream release 0.6.7
