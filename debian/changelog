@@ -10,6 +10,7 @@ gbirthday (0.6.7-1.1) experimental; urgency=medium
   * Build using dh-python instead of python-support.  Closes: #786165.
     Also, move all the files to the private location /usr/share/gbirthday, since
     this is an application.
+  * Rewrite debian/watch to use github as source.
 
  -- Mattia Rizzolo <mattia@debian.org>  Wed, 16 Dec 2015 00:13:45 +0000
 
