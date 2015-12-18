@@ -2,12 +2,13 @@ Source: gbirthday
 Section: gnome
 Priority: extra
 Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
-Build-Depends: debhelper (>= 7.0.50~),
-               intltool,
-               python-coverage,
-               python-gtk2,
-               python-nose,
-               python-support
+Build-Depends:
+ debhelper (>= 7.0.50~),
+ intltool,
+ python-coverage,
+ python-gtk2,
+ python-nose,
+ python-support
 X-Python-Version: >= 2.6
 Standards-Version: 3.9.6
 Homepage: http://gbirthday.sf.net/
@@ -16,13 +17,13 @@ Vcs-Git: git://git.debian.org/collab-maint/gbirthday.git
 
 Package: gbirthday
 Architecture: all
-Depends: python,
-         python-gtk2 (>= 2.10),
-         ${misc:Depends},
-         ${python:Depends},
-         ${shlibs:Depends}
-Recommends: evolution-data-server,
-            python-evolution
+Depends:
+ python,
+ python-gtk2 (>= 2.10),
+ ${misc:Depends},
+ ${python:Depends},
+ ${shlibs:Depends}
+Recommends: evolution-data-server, python-evolution
 Description: birthday reminder applet
  GBirthday is an applet to help you remember your friends' and contacts'
  birthdays.  It uses the notifcation area for alerts.  Data can be stored
